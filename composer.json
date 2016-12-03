@@ -3,6 +3,7 @@
     "description": "Authentication server compatible with OAuth2.",
     "type": "yii2-extension",
     "require": {
+        "php": ">=5.5.0",
         "yiisoft/yii2": "^2.0",
         "facebook/graph-sdk": "^5.4"
     },

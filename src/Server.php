@@ -8,13 +8,13 @@
 namespace jakim\authserver;
 
 
+use jakim\authserver\base\UserIdentityInterface;
 use jakim\authserver\grants\GrantType;
 use jakim\authserver\grants\PasswordCredentials;
 use jakim\authserver\grants\RefreshToken;
 use jakim\authserver\response\TokenResponse;
 use jakim\authserver\tokens\Token;
 use jakim\authserver\tokens\TokenInterface;
-use app\modules\api\v1\models\User;
 use yii\base\Component;
 use yii\web\Request;
 use yii\web\ServerErrorHttpException;
@@ -35,7 +35,7 @@ class Server extends Component
      */
     public $refreshTokenTtl = 60 * 60 * 24 * 30;
 
-    public $accessTokenType = 'bearer';
+    public $accessTokenType = 'Bearer';
 
     public $grantTypes = [
         'password' => PasswordCredentials::class,
@@ -60,21 +60,21 @@ class Server extends Component
 
 
     /**
-     * @return TokenResponse|null
-     * @throws ServerErrorHttpException
+     * @return \jakim\authserver\response\TokenResponse|null
+     * @throws \yii\web\ServerErrorHttpException
      */
     public function getResponse()
     {
         $grant = $this->resolveGrant();
         if ($grant && $grant->load($this->request->post(), '') && $grant->validate()) {
-            /** @var User $user */
+            /** @var UserIdentityInterface $user */
             if (($user = $grant->findUser()) === null) {
                 \Yii::error("Invalid grant: " . get_class($grant), __METHOD__);
                 $this->error = 'invalid_grant';
 
             } else {
-                $user->access_token = $this->generateAccessToken();
-                $user->refresh_token = $this->generateRefreshToken();
+                $user->setAccessToken($this->generateAccessToken());
+                $user->setRefreshToken($this->generateRefreshToken());
                 if (!$user->save()) {
                     \Yii::error('User model error: ' . print_r($user->getErrors(), true), __METHOD__);
                     throw new ServerErrorHttpException();
@@ -109,7 +109,7 @@ class Server extends Component
     }
 
     /**
-     * @return GrantType|null
+     * @return \jakim\authserver\grants\GrantType|null
      */
     protected function resolveGrant()
     {
@@ -144,16 +144,16 @@ class Server extends Component
     }
 
     /**
-     * @param $user
-     * @return TokenResponse
+     * @param \jakim\authserver\base\UserIdentityInterface $user
+     * @return \jakim\authserver\response\TokenResponse
      */
-    protected function prepareResponse($user)
+    protected function prepareResponse(UserIdentityInterface $user)
     {
         return new TokenResponse([
-            'access_token' => $user->access_token,
+            'access_token' => $user->getAccessToken(),
             'token_type' => $this->accessTokenType,
             'expires_in' => $this->accessTokenTtl,
-            'refresh_token' => $user->refresh_token,
+            'refresh_token' => $user->getRefreshToken(),
         ]);
 
     }

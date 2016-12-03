@@ -3,7 +3,11 @@
 namespace jakim\authserver\base;
 
 
-interface FacebookUserIdentityInterface
+interface FacebookUserIdentityInterface extends UserIdentityInterface
 {
-    public static function findByFacebookGraphUser($user);
+    /**
+     * @param $user
+     * @return UserIdentityInterface
+     */
+    public static function findIdentityByFacebookGraphUser($user);
 }

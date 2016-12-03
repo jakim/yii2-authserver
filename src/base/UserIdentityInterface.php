@@ -10,7 +10,24 @@ namespace jakim\authserver\base;
 
 interface UserIdentityInterface
 {
-    public static function findByCredentials($username, $password);
+    /**
+     * @param $username
+     * @param $password
+     * @return UserIdentityInterface
+     */
+    public static function findIdentityByCredentials($username, $password);
 
-    public static function findByRefreshToken($refreshToken);
+    /**
+     * @param $refreshToken
+     * @return UserIdentityInterface
+     */
+    public static function findIdentityByRefreshToken($refreshToken);
+
+    public function setAccessToken($token);
+
+    public function getAccessToken();
+
+    public function setRefreshToken($token);
+
+    public function getRefreshToken();
 }

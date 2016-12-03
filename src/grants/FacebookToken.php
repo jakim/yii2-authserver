@@ -32,7 +32,7 @@ class FacebookToken extends GrantType
         $graphUser = $this->getFacebookUser();
         /** @var FacebookUserIdentityInterface $class */
         $class = \Yii::$app->user->identityClass;
-        return $class::findByFacebookGraphUser($graphUser);
+        return $class::findIdentityByFacebookGraphUser($graphUser);
 
     }
 
