@@ -19,6 +19,12 @@ class HttpBearerAuth extends \yii\filters\auth\HttpBearerAuth
      */
     public $authServer = 'authServer';
 
+    /**
+     * @param \yii\web\User $user
+     * @param \yii\web\Request $request
+     * @param \yii\web\Response $response
+     * @return null|\yii\web\IdentityInterface
+     */
     public function authenticate($user, $request, $response)
     {
         $authHeader = $request->getHeaders()->get('Authorization');

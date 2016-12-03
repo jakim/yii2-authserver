@@ -15,8 +15,8 @@ class FacebookToken extends GrantType
 {
     public $app_id;
     public $app_secret;
-    public $fields = 'name,picture.type(large){url}';
     public $default_graph_version = 'v2.8';
+    public $fields = 'name,picture.type(large){url}';
 
     public $facebook_token;
 
@@ -42,9 +42,9 @@ class FacebookToken extends GrantType
     protected function getFacebookUser()
     {
         $facebook = new Facebook([
-            'default_graph_version' => $this->default_graph_version,
             'app_id' => $this->app_id,
             'app_secret' => $this->app_secret,
+            'default_graph_version' => $this->default_graph_version,
         ]);
 
         $url = 'me' . ($this->fields ? "?fields={$this->fields}" : '');
