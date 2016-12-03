@@ -1,12 +1,14 @@
 <?php
 /**
- * Created for yii2-api-starter.
+ * Created for yii2-authserver.
  * User: jakim <pawel@jakimowski.info>
  * Date: 15.11.2016
  */
 
 namespace jakim\authserver\base;
 
+
+use jakim\authserver\Server;
 
 interface UserIdentityInterface
 {
@@ -30,4 +32,10 @@ interface UserIdentityInterface
     public function setRefreshToken($token);
 
     public function getRefreshToken();
+
+    /**
+     * @see Server line ~79
+     */
+    public function save();
+    public function getErrors();
 }
