@@ -12,6 +12,7 @@ use jakim\authserver\base\UserIdentityInterface;
 use jakim\authserver\grants\GrantType;
 use jakim\authserver\grants\PasswordCredentials;
 use jakim\authserver\grants\RefreshToken;
+use jakim\authserver\response\ErrorResponse;
 use jakim\authserver\response\TokenResponse;
 use jakim\authserver\tokens\Token;
 use jakim\authserver\tokens\TokenInterface;
@@ -91,13 +92,13 @@ class Server extends Component
     }
 
     /**
-     * @return array
+     * @return \jakim\authserver\response\ErrorResponse|null
      *
      * @see https://tools.ietf.org/html/rfc6749#section-5.2
      */
     public function getError()
     {
-        return $this->error ? ['error' => $this->error] : null;
+        return $this->error ? new ErrorResponse(['error' => $this->error]) : null;
     }
 
     public function validateAccessToken($token)
