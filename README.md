@@ -4,7 +4,7 @@ This README would normally document whatever steps are necessary to get your app
 
 ### What is this repository for? ###
 
-* the main purpose of this package is simplify of the authentication process.
+* The main purpose of this package is simplify of the authentication process.
 * dev
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
