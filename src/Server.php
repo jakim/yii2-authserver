@@ -27,6 +27,7 @@ class Server extends Component
      * @var integer
      */
     public $accessTokenTtl = 60 * 60 * 2;
+    public $accessTokenClass = Token::class;
 
     /**
      * In seconds, default: 1 month
@@ -34,6 +35,7 @@ class Server extends Component
      * @var integer
      */
     public $refreshTokenTtl = 60 * 60 * 24 * 30;
+    public $refreshTokenClass = Token::class;
 
     public $accessTokenType = 'Bearer';
 
@@ -42,8 +44,6 @@ class Server extends Component
         'refresh_token' => RefreshToken::class,
     ];
 
-    public $accessTokenClass = Token::class;
-    public $refreshTokenClass = Token::class;
 
     /**
      * @var Request
@@ -130,7 +130,7 @@ class Server extends Component
     protected function generateAccessToken()
     {
         /** @var Token $token */
-        $token = new $this->accessTokenClass($this->accessTokenTtl);
+        $token = \Yii::createObject($this->accessTokenClass, [$this->accessTokenTtl]);
 
         return $token->generate();
     }
@@ -138,7 +138,7 @@ class Server extends Component
     protected function generateRefreshToken()
     {
         /** @var Token $token */
-        $token = new $this->refreshTokenClass($this->refreshTokenTtl);
+        $token = \Yii::createObject($this->refreshTokenClass, [$this->refreshTokenTtl]);
 
         return $token->generate();
     }
