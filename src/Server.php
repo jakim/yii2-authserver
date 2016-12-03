@@ -63,6 +63,8 @@ class Server extends Component
     /**
      * @return \jakim\authserver\response\TokenResponse|null
      * @throws \yii\web\ServerErrorHttpException
+     *
+     * @see https://tools.ietf.org/html/rfc6749#section-4.3
      */
     public function getResponse()
     {
