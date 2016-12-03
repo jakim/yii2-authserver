@@ -1,0 +1,16 @@
+{
+    "name": "jakim-pj/yii2-authserver",
+    "description": "Authentication server compatible with OAuth2.",
+    "type": "yii2-extension",
+    "require": {
+        "yiisoft/yii2": "^2.0",
+        "facebook/graph-sdk": "^5.4"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jakimowski",
+            "email": "pawel@jakimowski.info"
+        }
+    ]
+}
