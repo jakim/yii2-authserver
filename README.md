@@ -18,6 +18,8 @@ This README would normally document whatever steps are necessary to get your app
 * Deployment instructions
 
 
+## Componet configuration
+
 ```
 #!php
 
@@ -34,6 +36,24 @@ This README would normally document whatever steps are necessary to get your app
                 ]
             ],
         ],
+```
+
+## Usage example 
+
+
+```
+#!php
+
+        /** @var Server $server */
+        $server = Instance::ensure('authServer', Server::class);
+
+        if (($response = $server->getResponse()) === null) {
+            \Yii::$app->response->setStatusCode(400);
+
+            return $server->getError();
+        }
+
+        return $response;
 ```
 
 
