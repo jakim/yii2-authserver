@@ -27,7 +27,7 @@ class FacebookToken extends GrantType
         ];
     }
 
-    public function findUser()
+    public function findIdentity()
     {
         $graphUser = $this->getFacebookUser();
         /** @var FacebookUserIdentityInterface $class */

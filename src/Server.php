@@ -53,6 +53,11 @@ class Server extends Component
 
     protected $error;
 
+    /**
+     * @var UserIdentityInterface
+     */
+    protected $identity;
+
     public function init()
     {
         parent::init();
@@ -70,20 +75,21 @@ class Server extends Component
     {
         $grant = $this->resolveGrant();
         if ($grant && $grant->load($this->request->post(), '') && $grant->validate()) {
-            /** @var UserIdentityInterface $user */
-            if (($user = $grant->findUser()) === null) {
+            /** @var UserIdentityInterface $identity */
+            if (($identity = $grant->findIdentity()) === null) {
                 \Yii::error("Invalid grant: " . get_class($grant), __METHOD__);
                 $this->error = 'invalid_grant';
 
             } else {
-                $user->setAccessToken($this->generateAccessToken());
-                $user->setRefreshToken($this->generateRefreshToken());
-                if (!$user->save()) {
-                    \Yii::error('User model error: ' . print_r($user->getErrors(), true), __METHOD__);
+                $identity->setAccessToken($this->generateAccessToken());
+                $identity->setRefreshToken($this->generateRefreshToken());
+                if (!$identity->save()) {
+                    \Yii::error('User model error: ' . print_r($identity->getErrors(), true), __METHOD__);
                     throw new ServerErrorHttpException();
                 }
+                $this->identity = $identity;
 
-                return $this->prepareResponse($user);
+                return $this->prepareResponse($identity);
             }
         } elseif ($grant && $grant->hasErrors()) {
             \Yii::error("Invalid request: " . print_r($grant->getErrors(), true), __METHOD__);
@@ -91,6 +97,14 @@ class Server extends Component
         }
 
         return null;
+    }
+
+    /**
+     * @return \jakim\authserver\base\UserIdentityInterface
+     */
+    public function getIdentity()
+    {
+        return $this->identity;
     }
 
     /**
@@ -147,16 +161,16 @@ class Server extends Component
     }
 
     /**
-     * @param \jakim\authserver\base\UserIdentityInterface $user
+     * @param \jakim\authserver\base\UserIdentityInterface $identity
      * @return \jakim\authserver\response\TokenResponse
      */
-    protected function prepareResponse(UserIdentityInterface $user)
+    protected function prepareResponse(UserIdentityInterface $identity)
     {
         return new TokenResponse([
-            'access_token' => $user->getAccessToken(),
+            'access_token' => $identity->getAccessToken(),
             'token_type' => $this->accessTokenType,
             'expires_in' => $this->accessTokenTtl,
-            'refresh_token' => $user->getRefreshToken(),
+            'refresh_token' => $identity->getRefreshToken(),
         ]);
 
     }

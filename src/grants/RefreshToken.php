@@ -21,7 +21,7 @@ class RefreshToken extends GrantType
         ];
     }
 
-    public function findUser()
+    public function findIdentity()
     {
         /** @var UserIdentityInterface $class */
         $class = \Yii::$app->user->identityClass;
