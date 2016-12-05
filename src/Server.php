@@ -45,7 +45,6 @@ class Server extends Component
         'refresh_token' => RefreshToken::class,
     ];
 
-
     /**
      * @var Request
      */
@@ -63,7 +62,6 @@ class Server extends Component
         parent::init();
         $this->request = \Yii::$app->request;
     }
-
 
     /**
      * @return \jakim\authserver\response\TokenResponse|null

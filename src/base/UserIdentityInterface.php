@@ -37,5 +37,6 @@ interface UserIdentityInterface
      * @see Server line ~79
      */
     public function save();
+
     public function getErrors();
 }

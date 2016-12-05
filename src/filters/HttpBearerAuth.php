@@ -15,6 +15,7 @@ class HttpBearerAuth extends \yii\filters\auth\HttpBearerAuth
 {
     /**
      * Name of server component.
+     *
      * @var string
      */
     public $authServer = 'authServer';
@@ -34,6 +35,7 @@ class HttpBearerAuth extends \yii\filters\auth\HttpBearerAuth
             $server = Instance::ensure($this->authServer, Server::class);
             if (!$server->validateAccessToken($matches[1])) {
                 \Yii::error('Invalid access token', __METHOD__);
+
                 return null;
             }
 
@@ -41,6 +43,7 @@ class HttpBearerAuth extends \yii\filters\auth\HttpBearerAuth
             if ($identity === null) {
                 $this->handleFailure($response);
             }
+
             return $identity;
         }
 

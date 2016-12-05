@@ -20,6 +20,7 @@ class Token implements TokenInterface
     public function generate()
     {
         $token = \Yii::$app->security->generateRandomString();
+
         return sprintf('%s_%s', $token, time() + $this->ttl);
     }
 
@@ -30,6 +31,7 @@ class Token implements TokenInterface
         if ($expires > time()) {
             return true;
         }
+
         return false;
     }
 }
