@@ -1,5 +1,7 @@
 ## The main purpose of this package is simplify the authentication process in restapi for mobile apps
 
+[![Latest Stable Version](https://poser.pugx.org/jakim-pj/yii2-authserver/v/stable)](https://packagist.org/packages/jakim-pj/yii2-authserver) [![Total Downloads](https://poser.pugx.org/jakim-pj/yii2-authserver/downloads)](https://packagist.org/packages/jakim-pj/yii2-authserver) [![Latest Unstable Version](https://poser.pugx.org/jakim-pj/yii2-authserver/v/unstable)](https://packagist.org/packages/jakim-pj/yii2-authserver) [![License](https://poser.pugx.org/jakim-pj/yii2-authserver/license)](https://packagist.org/packages/jakim-pj/yii2-authserver)
+
 ### Authentication server is compatible with OAuth 2.0
 
 ### Success response [RFC 6749](https://tools.ietf.org/html/rfc6749#section-5.1)
