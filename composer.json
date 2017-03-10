@@ -1,6 +1,7 @@
 {
     "name": "jakim-pj/yii2-authserver",
     "description": "Authentication server compatible with OAuth2.",
+    "keywords": ["yii", "yii2", "auth", "server", "rest","api","mobile", "extension", "component", "oauth", "oauth2"],
     "type": "yii2-extension",
     "require": {
         "php": ">=5.5.0",
