@@ -112,6 +112,8 @@ class Server extends Component
      */
     public function getError()
     {
+        \Yii::$app->response->setStatusCode(400);
+
         return $this->error ? new ErrorResponse(['error' => $this->error]) : null;
     }
 

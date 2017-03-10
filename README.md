@@ -138,7 +138,8 @@ public function getRefreshToken()
 ```
  3 . Create `token` action in auth controller
 
-Example:
+Example - custom action:
+
 ```php
 public function actionToken()
 {
@@ -146,14 +147,25 @@ public function actionToken()
     $server = Instance::ensure('authServer', Server::class);
 
     if (($response = $server->getResponse()) === null) {
-        \Yii::$app->response->setStatusCode(400);
 
-        return $server->error;
+        return $server->getError();
     }
 
     return $response;
 }
 ```
+
+Example - predefined action class:
+
+```php
+    public function actions()
+    {
+        return [
+            'token' => TokenAction::class,
+        ];
+    }
+```
+
 API Usage example:
 
 #### Arguments for password grant type
