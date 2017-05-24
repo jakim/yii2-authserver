@@ -12,5 +12,5 @@ use yii\base\Model;
 
 abstract class GrantType extends Model
 {
-    abstract function findIdentity();
+    abstract public function findIdentity();
 }
