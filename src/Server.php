@@ -112,6 +112,7 @@ class Server extends Component
      */
     public function getError()
     {
+        $this->setResponseHeaders();
         \Yii::$app->response->setStatusCode(400);
 
         return $this->error ? new ErrorResponse(['error' => $this->error]) : null;
@@ -166,6 +167,8 @@ class Server extends Component
      */
     protected function prepareResponse(UserIdentityInterface $identity)
     {
+        $this->setResponseHeaders();
+
         return new TokenResponse([
             'access_token' => $identity->getAccessToken(),
             'token_type' => $this->accessTokenType,
@@ -173,5 +176,12 @@ class Server extends Component
             'refresh_token' => $identity->getRefreshToken(),
         ]);
 
+    }
+
+    protected function setResponseHeaders()
+    {
+        $headers = \Yii::$app->response->headers;
+        $headers->set('Cache-Control', 'no-store');
+        $headers->set('Pragma', 'no-cache');
     }
 }
