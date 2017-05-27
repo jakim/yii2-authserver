@@ -8,8 +8,6 @@
 namespace jakim\authserver\grants;
 
 
-use jakim\authserver\base\UserIdentityInterface;
-
 class RefreshToken extends GrantType
 {
     public $refresh_token;
@@ -23,7 +21,7 @@ class RefreshToken extends GrantType
 
     public function findIdentity()
     {
-        /** @var UserIdentityInterface $class */
+        /** @var \jakim\authserver\base\UserIdentityInterface $class */
         $class = \Yii::$app->user->identityClass;
 
         return $class::findIdentityByRefreshToken($this->refresh_token);

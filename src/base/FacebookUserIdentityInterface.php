@@ -7,7 +7,7 @@ interface FacebookUserIdentityInterface extends UserIdentityInterface
 {
     /**
      * @param $user
-     * @return UserIdentityInterface
+     * @return \jakim\authserver\base\BaseIdentityInterface
      */
     public static function findIdentityByFacebookGraphUser($user);
 }

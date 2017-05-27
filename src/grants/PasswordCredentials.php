@@ -8,7 +8,6 @@
 namespace jakim\authserver\grants;
 
 
-use jakim\authserver\base\UserIdentityInterface;
 
 class PasswordCredentials extends GrantType
 {
@@ -25,7 +24,7 @@ class PasswordCredentials extends GrantType
 
     public function findIdentity()
     {
-        /** @var UserIdentityInterface $class */
+        /** @var \jakim\authserver\base\UserIdentityInterface $class */
         $class = \Yii::$app->user->identityClass;
 
         return $class::findIdentityByCredentials($this->username, $this->password);

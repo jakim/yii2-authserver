@@ -1,6 +1,6 @@
 <?php
 /**
- * Created for fitfck.
+ * Created for yii2-authserver.
  * User: jakim <pawel@jakimowski.info>
  * Date: 30.11.2016
  */
@@ -8,7 +8,6 @@
 namespace jakim\authserver\grants;
 
 
-use jakim\authserver\base\FacebookUserIdentityInterface;
 use Facebook\Facebook;
 
 class FacebookToken extends GrantType
@@ -30,7 +29,7 @@ class FacebookToken extends GrantType
     public function findIdentity()
     {
         $graphUser = $this->getFacebookUser();
-        /** @var FacebookUserIdentityInterface $class */
+        /** @var \jakim\authserver\base\FacebookUserIdentityInterface $class */
         $class = \Yii::$app->user->identityClass;
 
         return $class::findIdentityByFacebookGraphUser($graphUser);

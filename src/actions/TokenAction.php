@@ -1,17 +1,18 @@
 <?php
-
-namespace jakim\authserver\actions;
-
-
-use jakim\authserver\Server;
-use yii\di\Instance;
-
 /**
  * Created for yii2-authserver.
  * User: jakim <pawel@jakimowski.info>
  * Date: 10.03.2017
  */
-class TokenAction extends \yii\base\Action
+
+namespace jakim\authserver\actions;
+
+
+use jakim\authserver\Server;
+use yii\base\Action;
+use yii\di\Instance;
+
+class TokenAction extends Action
 {
     /**
      * Component ID.
