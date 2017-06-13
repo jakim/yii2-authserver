@@ -8,6 +8,7 @@
 namespace jakim\authserver;
 
 
+use jakim\authserver\base\BaseIdentityInterface;
 use jakim\authserver\base\UserIdentityInterface;
 use jakim\authserver\grants\GrantType;
 use jakim\authserver\grants\PasswordCredentials;
@@ -162,10 +163,10 @@ class Server extends Component
     }
 
     /**
-     * @param \jakim\authserver\base\UserIdentityInterface $identity
+     * @param \jakim\authserver\base\BaseIdentityInterface $identity
      * @return \jakim\authserver\response\TokenResponse
      */
-    protected function prepareResponse(UserIdentityInterface $identity)
+    protected function prepareResponse(BaseIdentityInterface $identity)
     {
         $this->setResponseHeaders();
 
