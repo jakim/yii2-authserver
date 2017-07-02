@@ -10,13 +10,13 @@ namespace jakim\authserver\grants;
 
 class ClientCredentials extends GrantType
 {
-    public $clientId;
-    public $clientSecret;
+    public $client_id;
+    public $client_secret;
 
     public function rules()
     {
         return [
-            [['clientId', 'clientSecret'], 'required'],
+            [['client_id', 'client_secret'], 'required'],
         ];
     }
 
@@ -26,6 +26,6 @@ class ClientCredentials extends GrantType
         /** @var \jakim\authserver\base\ClientCredentialsIdentityInterface $class */
         $class = \Yii::$app->user->identityClass;
 
-        return $class::findIdentityByClientCredentials($this->clientId, $this->clientSecret);
+        return $class::findIdentityByClientCredentials($this->client_id, $this->client_secret);
     }
 }
